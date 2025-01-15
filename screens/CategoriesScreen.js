@@ -16,6 +16,7 @@ const CategoriesScreen = () => {
             data={CATEGORIES}
             keyExtractor={item => item.id}
             renderItem={renderCategoryItem}
+            numColumns={2}
         />
     </View>
   )
@@ -25,9 +26,5 @@ export default CategoriesScreen
 
 const styles = StyleSheet.create({
     screen : {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 2,
     }
 });

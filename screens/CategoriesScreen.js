@@ -26,5 +26,6 @@ export default CategoriesScreen
 
 const styles = StyleSheet.create({
     screen : {
+        paddingVertical: 15,
     }
 });

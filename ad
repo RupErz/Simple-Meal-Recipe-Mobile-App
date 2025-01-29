@@ -1,0 +1,23 @@
+[33mcommit 04d4b3f84adf981ed589e491ad4d319d1a9a1cca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Nghia <nghiavu144@gmail.com>
+Date:   Wed Jan 15 08:37:38 2025 -0600
+
+    Status bar changed and adding color, ripple effect onto grid section
+
+[33mcommit 1cfd891b03dbfb4cbfc94228b79bd2b45ea221f7[m
+Author: Nghia <nghiavu144@gmail.com>
+Date:   Wed Jan 15 08:06:13 2025 -0600
+
+    Divid FlatList into 2 columns and styling it with equal container
+
+[33mcommit 5812049b19b9d89e2e415c3620a90045ad3eb48c[m
+Author: Nghia <nghiavu144@gmail.com>
+Date:   Wed Jan 15 04:14:07 2025 -0600
+
+    Printing data from dummy onto screen
+
+[33mcommit 9e5d35ef609f7920a8217a21eaec866d8664db26[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Nghia <nghiavu144@gmail.com>
+Date:   Wed Jan 15 02:59:22 2025 -0600
+
+    First Commit

@@ -7,7 +7,10 @@ const CategoriesScreen = ({ navigation }) => {
 
     function renderCategoryItem(itemData) {
         const pressHandler = () => {
-            navigation.navigate('MealOverview');
+            // Using the name from Screen to navigate the screen we want
+            navigation.navigate('MealOverview', {
+                categoryId: itemData.item.id,
+            });
         }
     
         return (

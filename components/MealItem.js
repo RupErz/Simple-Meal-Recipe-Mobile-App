@@ -1,34 +1,46 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View, Platform } from 'react-native'
 
-const MealItem = ({ title, imgUrl, duration, affordability, complexity }) => {
-  return (
-    <View style={styles.mealItem}>
-        <Pressable
-            android_ripple={{color: '#ccc'}}
-            style = {({pressed}) => (pressed & Platform.OS === 'ios') ? styles.iosRipple : {}}
-        >
-            <View style={styles.innerContainer}>
-                <View>
-                    {/* Image from outside must be styled to been shown on screen */}
-                    <Image 
-                        source={{uri: imgUrl}}
-                        style={styles.image}
-                    />
-                    <Text style={styles.title}>{title}</Text>
-                </View>
+const MealItem = ({ id, title, imgUrl, duration, affordability, complexity }) => {
 
-                <View style={styles.details}>
-                    <Text style={styles.detailsItem}>{duration}</Text>
-                    <Text style={styles.detailsItem}>{complexity.toUpperCase()}</Text>
-                    <Text style={styles.detailsItem}>{affordability.toUpperCase()}</Text>
+    const navigation = useNavigation()
+    
+    const navigateToDetail = () => {
+        // Using navigation hook to get navigation object 
+        navigation.navigate('MealDetail', {
+            mealId: id
+        })
+    }
+    
+    return (
+        <View style={styles.mealItem}>
+            <Pressable
+                android_ripple={{color: '#ccc'}}
+                style = {({pressed}) => (pressed & Platform.OS === 'ios') ? styles.iosRipple : {}}
+                onPress={navigateToDetail}
+            >
+                <View style={styles.innerContainer}>
+                    <View>
+                        {/* Image from outside must be styled to been shown on screen */}
+                        <Image 
+                            source={{uri: imgUrl}}
+                            style={styles.image}
+                        />
+                        <Text style={styles.title}>{title}</Text>
+                    </View>
+
+                    <View style={styles.details}>
+                        <Text style={styles.detailsItem}>{duration}</Text>
+                        <Text style={styles.detailsItem}>{complexity.toUpperCase()}</Text>
+                        <Text style={styles.detailsItem}>{affordability.toUpperCase()}</Text>
+                    </View>
                 </View>
-            </View>
-        </Pressable>
-        
-        
-    </View>
-  )
+            </Pressable>
+            
+            
+        </View>
+    )
 }
 
 export default MealItem

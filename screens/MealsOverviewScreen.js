@@ -24,17 +24,29 @@ const MealsOverviewScreen = ({ route, navigation }) => {
 
     const renderMealItem = (itemData) => {
         const mealItemProps = {
+            id: itemData.item.id,
             title: itemData.item.title,
             imgUrl: itemData.item.imageUrl,
             duration: itemData.item.duration,
             affordability: itemData.item.affordability,
             complexity: itemData.item.complexity
         }
+
+        // // Navigate to meal detailed screen
+        // const navigateToDetail = () => {
+        //     navigation.navigate('MealDetail', {
+        //         mealId: itemData.item.id
+        //     })
+        // }
+
         return (
             <MealItem 
-                {...mealItemProps}/>
+                {...mealItemProps}
+            />
         )
     }
+
+    
 
     return (
         <View style={styles.container}>

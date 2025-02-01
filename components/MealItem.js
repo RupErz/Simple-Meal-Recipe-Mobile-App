@@ -6,7 +6,7 @@ const MealItem = ({ title, imgUrl, duration, affordability, complexity }) => {
     <View style={styles.mealItem}>
         <Pressable
             android_ripple={{color: '#ccc'}}
-            style = {({pressed}) => pressed ? styles.iosRipple : {}}
+            style = {({pressed}) => (pressed & Platform.OS === 'ios') ? styles.iosRipple : {}}
         >
             <View style={styles.innerContainer}>
                 <View>

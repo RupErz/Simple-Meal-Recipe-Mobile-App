@@ -4,6 +4,7 @@ import {MEALS} from "../data/dummy-data"
 import MealDetail from '../components/MealDetail'
 import Subtitle from '../components/MealDetail/Subtitle'
 import List from '../components/MealDetail/List'
+import IconButton from '../components/IconButton'
 
 
 const MealsDetailScreen = ({ navigation, route }) => {
@@ -31,9 +32,10 @@ const MealsDetailScreen = ({ navigation, route }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Button 
-                    title="Tap me!" 
-                    onPress={headerButtonPressHandler}
+                <IconButton 
+                    icon={"star"}
+                    onTap={headerButtonPressHandler}   
+                    color={"white"} 
                 />
             )
         })

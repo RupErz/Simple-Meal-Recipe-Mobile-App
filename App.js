@@ -7,6 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealsDetailScreen from './screens/MealsDetailScreen';
 import FavoriteScreen from './screens/FavoriteScreen';
+import { Ionicons } from '@expo/vector-icons'
 
 export default function App() {
   
@@ -19,13 +20,18 @@ export default function App() {
       <Drawer.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#351401'
+            backgroundColor: '#FF6F61'
           },
           headerTintColor: 'white', // Color of the text in the header
           sceneStyle: { // Style for the content of the screen
             backgroundColor: 'pink'
           },
-          headerTitleAlign: 'center'
+          headerTitleAlign: 'center',
+          drawerContentStyle: {
+            backgroundColor: 'pink'
+          },
+          drawerInactiveTintColor: 'black',
+          drawerActiveTintColor: 'white',
         }}
       >
         {/* Default Screen for Drawer Navigator */}
@@ -34,7 +40,12 @@ export default function App() {
           component={CategoriesScreen}
           options={
             {
-              title: 'All Categories'
+              title: 'All Categories',
+              drawerIcon: ({ size, color }) => {
+                return (
+                  <Ionicons name='list' color={color} size={size} />
+                )
+              }
             }
           }
         />
@@ -42,6 +53,13 @@ export default function App() {
         <Drawer.Screen 
           name='FavoriteScreen'
           component={FavoriteScreen}
+          options={{
+            drawerIcon: ({ size, color }) => {
+              return (
+                <Ionicons name='star' color={color} size={size} />
+              )
+            }
+          }}
         />
       </Drawer.Navigator>
     )
@@ -54,7 +72,7 @@ export default function App() {
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: '#351401'
+              backgroundColor: '#FF6F61'
             },
             headerTintColor: 'white', // Color of the text in the header
             contentStyle: { // Style for the content of the screen

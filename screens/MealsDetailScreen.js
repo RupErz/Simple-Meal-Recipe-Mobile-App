@@ -79,7 +79,7 @@ export default MealsDetailScreen
 
 const styles = StyleSheet.create({
     root: {
-        marginBottom: 32
+        marginBottom: 90
     },
     image: {
         width: '100%',

@@ -3,13 +3,49 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import CategoriesScreen from './screens/CategoriesScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealsDetailScreen from './screens/MealsDetailScreen';
+import FavoriteScreen from './screens/FavoriteScreen';
 
 export default function App() {
   
   // Now Stack is an object hold 2 property as a COMPONENTS
   const Stack = createNativeStackNavigator()
+  const Drawer = createDrawerNavigator()
+
+  const DrawerNavigator = () => {
+    return (
+      <Drawer.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#351401'
+          },
+          headerTintColor: 'white', // Color of the text in the header
+          sceneStyle: { // Style for the content of the screen
+            backgroundColor: 'pink'
+          },
+          headerTitleAlign: 'center'
+        }}
+      >
+        {/* Default Screen for Drawer Navigator */}
+        <Drawer.Screen 
+          name='Categories'
+          component={CategoriesScreen}
+          options={
+            {
+              title: 'All Categories'
+            }
+          }
+        />
+
+        <Drawer.Screen 
+          name='FavoriteScreen'
+          component={FavoriteScreen}
+        />
+      </Drawer.Navigator>
+    )
+  }
 
   return (
     <>
@@ -31,21 +67,16 @@ export default function App() {
           {/* Allow us to register a screen within a Navigator */}
           <Stack.Screen 
             name="MealCategories" 
-            component={CategoriesScreen} 
+            // Drawer Navigation nested within Stack Navigation
+            component={DrawerNavigator} 
             options={{
-              title: 'All Categories',
+              headerShown: false
             }}
           /> 
 
           <Stack.Screen 
             name='MealOverview' 
             component={MealsOverviewScreen} 
-            // options={({ route, navigation }) => {
-            //   const { categoryId } = route.params
-            //   return {
-            //     title: categoryId
-            //   }
-            // }}  
           />
 
           <Stack.Screen

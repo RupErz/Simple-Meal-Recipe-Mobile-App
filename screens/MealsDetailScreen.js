@@ -1,5 +1,5 @@
-import React, { useLayoutEffect } from 'react'
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import React, { use, useLayoutEffect } from 'react'
+import { Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import {MEALS} from "../data/dummy-data"
 import MealDetail from '../components/MealDetail'
 import Subtitle from '../components/MealDetail/Subtitle'
@@ -13,14 +13,31 @@ const MealsDetailScreen = ({ navigation, route }) => {
     // Find the Meal object we need with the id
     const selectedMeal = MEALS.find((meal) => meal.id === mealId)
 
+    // 
+    const headerButtonPressHandler = () => {
+        console.log("Pressed")
+    }
+
     // Dynamically update header of the screen
     useLayoutEffect(() => {
         const mealTitle = selectedMeal.title
 
         navigation.setOptions({
-            title: mealTitle
+            title: mealTitle,
         })
     }, [mealId])
+
+    // Dynamically update header of screen with a button
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button 
+                    title="Tap me!" 
+                    onPress={headerButtonPressHandler}
+                />
+            )
+        })
+    }, [navigation, headerButtonPressHandler])
 
     return (
         <ScrollView style={styles.root}>

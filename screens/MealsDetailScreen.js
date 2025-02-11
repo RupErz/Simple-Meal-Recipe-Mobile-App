@@ -1,22 +1,36 @@
-import React, { use, useLayoutEffect } from 'react'
+import React, { use, useContext, useLayoutEffect } from 'react'
 import { Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import {MEALS} from "../data/dummy-data"
 import MealDetail from '../components/MealDetail'
 import Subtitle from '../components/MealDetail/Subtitle'
 import List from '../components/MealDetail/List'
 import IconButton from '../components/IconButton'
+import { FavoritesContext } from '../store/context/favorites-context'
 
 
 const MealsDetailScreen = ({ navigation, route }) => {
+    // Accessing the context
+    // const favoriteMealCtx = useContext(FavoritesContext);
+    const favoriteMealCtx = useContext(FavoritesContext);
 
     const { mealId } = route.params
+
+    // Check whether this meal is favorite or not by looking at fav id list. -> T/F
+    const mealIsFavorite = favoriteMealCtx.ids.includes(mealId)
 
     // Find the Meal object we need with the id
     const selectedMeal = MEALS.find((meal) => meal.id === mealId)
 
     // 
-    const headerButtonPressHandler = () => {
+    const changeFavoriteStatusHandler = () => {
         console.log("Pressed")
+        if (mealIsFavorite) {
+            // Remove the id from fav id list.
+            favoriteMealCtx.removeFavorite(mealId)
+        } else {
+            favoriteMealCtx.addFavorite(mealId)
+        }
+        
     }
 
     // Dynamically update header of the screen
@@ -33,13 +47,13 @@ const MealsDetailScreen = ({ navigation, route }) => {
         navigation.setOptions({
             headerRight: () => (
                 <IconButton 
-                    icon={"star"}
-                    onTap={headerButtonPressHandler}   
+                    icon={mealIsFavorite ? "star" : "star-outline"}
+                    onTap={changeFavoriteStatusHandler}   
                     color={"white"} 
                 />
             )
         })
-    }, [navigation, headerButtonPressHandler])
+    }, [navigation, changeFavoriteStatusHandler])
 
     return (
         <ScrollView style={styles.root}>

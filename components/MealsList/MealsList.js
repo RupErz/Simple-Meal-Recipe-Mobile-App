@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import MealItem from './MealItem'
 
 const MealsList = ({ displayedMeals }) => {
-
+    
     const renderMealItem = (itemData) => {
         const mealItemProps = {
             id: itemData.item.id,

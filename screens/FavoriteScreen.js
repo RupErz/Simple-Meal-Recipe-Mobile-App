@@ -1,12 +1,43 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React, { useContext } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import MealsList from '../components/MealsList/MealsList'
+import { FavoritesContext } from '../store/context/favorites-context'
+import {MEALS} from "../data/dummy-data"
 
 const FavoriteScreen = () => {
+  const favoriteMeals = useContext(FavoritesContext);
+
+  // We need to from id list of fav meal convert into an object Meals
+  const displayedMeals = favoriteMeals.ids.map((mealId) => {
+    return MEALS.find((meal) => meal.id === mealId)
+  })
+
+  if (displayedMeals.length === 0) {
+    return (
+      <View style={styles.rootContainer}>
+        <Text style={styles.favoriteTextDisplay}> You have no favorite meals yet. </Text>
+      </View>
+    )
+  }
   return (
-    <View>
-        <Text>Fav Screen</Text>
-    </View>
+    <>
+      <MealsList displayedMeals={displayedMeals} />
+    </>
   )
 }
 
 export default FavoriteScreen
+
+const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  favoriteTextDisplay: {
+    color: 'black',
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+})

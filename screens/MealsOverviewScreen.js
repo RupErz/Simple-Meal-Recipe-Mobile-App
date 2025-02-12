@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import {MEALS, CATEGORIES} from "../data/dummy-data"
-import MealItem from '../components/MealItem'
+import MealsList from '../components/MealsList/MealsList'
 
 const MealsOverviewScreen = ({ route, navigation }) => {
     const { categoryId } = route.params
@@ -19,51 +19,10 @@ const MealsOverviewScreen = ({ route, navigation }) => {
             title: categoryTitle
         })
     }, [categoryId]) // Once we have a diff id we need to rerender.
-
     
-
-    const renderMealItem = (itemData) => {
-        const mealItemProps = {
-            id: itemData.item.id,
-            title: itemData.item.title,
-            imgUrl: itemData.item.imageUrl,
-            duration: itemData.item.duration,
-            affordability: itemData.item.affordability,
-            complexity: itemData.item.complexity
-        }
-
-        // // Navigate to meal detailed screen
-        // const navigateToDetail = () => {
-        //     navigation.navigate('MealDetail', {
-        //         mealId: itemData.item.id
-        //     })
-        // }
-
-        return (
-            <MealItem 
-                {...mealItemProps}
-            />
-        )
-    }
-
-    
-
     return (
-        <View style={styles.container}>
-            <FlatList 
-                data={displayedMeals}
-                keyExtractor={item => item.id}
-                renderItem={renderMealItem}
-            />
-        </View>
+        <MealsList displayedMeals={displayedMeals} />
     )
 }
 
 export default MealsOverviewScreen
-
-const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        padding: 16,
-    }
-})

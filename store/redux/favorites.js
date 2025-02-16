@@ -9,9 +9,9 @@ const favortesSlice = createSlice({
     reducers: { // Function to change our state
         // Every method auto get latest state as a first parameter
         addFavorite: (state, action) => {
-            state.ids.push(action.payload.id);
+            state.ids.push(action.payload.id); // This fcn take an object with props name 'id'
         },
-        removeFavorite: (state) => {
+        removeFavorite: (state, action) => {
             state.ids.splice(state.ids.indexOf(action.payload.id), 1);
         }
     }

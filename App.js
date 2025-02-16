@@ -10,7 +10,7 @@ import FavoriteScreen from './screens/FavoriteScreen';
 import { Ionicons } from '@expo/vector-icons'
 // import FavoritesContextProvider from './store/context/favorites-context';
 import { Provider } from 'react-redux';
-import store from "./store/store";
+import { store } from './store/redux/store';
 
 export default function App() {
   

@@ -5,18 +5,22 @@ import MealDetail from '../components/MealDetail'
 import Subtitle from '../components/MealDetail/Subtitle'
 import List from '../components/MealDetail/List'
 import IconButton from '../components/IconButton'
-import { FavoritesContext } from '../store/context/favorites-context'
+import { useSelector, useDispatch } from 'react-redux'
+import { addFavorite, removeFavorite } from '../store/redux/favorites'
+// import { FavoritesContext } from '../store/context/favorites-context'
 
 
 const MealsDetailScreen = ({ navigation, route }) => {
+    const { mealId } = route.params
+    // ---------- React Context  
     // Accessing the context
     // const favoriteMealCtx = useContext(FavoritesContext);
-    const favoriteMealCtx = useContext(FavoritesContext);
+    // const favoriteMealCtx = useContext(FavoritesContext);
 
-    const { mealId } = route.params
-
-    // Check whether this meal is favorite or not by looking at fav id list. -> T/F
-    const mealIsFavorite = favoriteMealCtx.ids.includes(mealId)
+    // ---------- Redux
+    const favoriteMealId = useSelector((state) => state.favoriteMeals.ids)
+    const mealIsFavorite = favoriteMealId.includes(mealId)
+    const dispatch = useDispatch()
 
     // Find the Meal object we need with the id
     const selectedMeal = MEALS.find((meal) => meal.id === mealId)
@@ -26,9 +30,11 @@ const MealsDetailScreen = ({ navigation, route }) => {
         console.log("Pressed")
         if (mealIsFavorite) {
             // Remove the id from fav id list.
-            favoriteMealCtx.removeFavorite(mealId)
+            // favoriteMealCtx.removeFavorite(mealId)
+            dispatch(removeFavorite({ id: mealId })) 
         } else {
-            favoriteMealCtx.addFavorite(mealId)
+            // favoriteMealCtx.addFavorite(mealId)
+            dispatch(addFavorite({ id: mealId}))
         }
         
     }

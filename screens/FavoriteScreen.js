@@ -1,16 +1,24 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import MealsList from '../components/MealsList/MealsList'
-import { FavoritesContext } from '../store/context/favorites-context'
+// import { FavoritesContext } from '../store/context/favorites-context'
 import {MEALS} from "../data/dummy-data"
+import { useSelector } from 'react-redux'
 
 const FavoriteScreen = () => {
-  const favoriteMeals = useContext(FavoritesContext);
-
+  // -------------- React Context
+  // const favoriteMeals = useContext(FavoritesContext);
   // We need to from id list of fav meal convert into an object Meals
-  const displayedMeals = favoriteMeals.ids.map((mealId) => {
+  // const displayedMeals = favoriteMeals.ids.map((mealId) => {
+  //   return MEALS.find((meal) => meal.id === mealId)
+  // })
+
+  //---------------- Redux
+  const favoriteMealsId = useSelector((state) => state.favoriteMeals.ids)
+  const displayedMeals = favoriteMealsId.map((mealId) => {
     return MEALS.find((meal) => meal.id === mealId)
   })
+
 
   if (displayedMeals.length === 0) {
     return (
